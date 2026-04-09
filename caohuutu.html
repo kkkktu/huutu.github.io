@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra mật khẩu</title>
+</head>
+<body>
+
+<script>
+function kiemTraMatKhau(password) {
+    let loi = [];
+
+    if (password.length < 8) {
+        loi.push("Mật khẩu phải có ít nhất 8 ký tự");
+    }
+
+    if (!/[A-Z]/.test(password)) {
+        loi.push("Phải có ít nhất 1 chữ hoa (A-Z)");
+    }
+
+    if (!/[a-z]/.test(password)) {
+        loi.push("Phải có ít nhất 1 chữ thường (a-z)");
+    }
+
+    if (!/[0-9]/.test(password)) {
+        loi.push("Phải có ít nhất 1 chữ số (0-9)");
+    }
+
+    if (!/[@#$%^&*(),.?":{}|<>]/.test(password)) {
+        loi.push("Phải có ít nhất 1 ký tự đặc biệt");
+    }
+
+    return loi;
+}
+
+function danhGiaDoManh(password) {
+    if (password.length === 8) {
+        return "Yếu";
+    } else if (password.length < 12) {
+        return "Trung bình";
+    } else {
+        return "Mạnh";
+    }
+}
+
+function nhapMatKhau() {
+    let password;
+
+    while (true) {
+        password = prompt("Nhập mật khẩu:");
+
+        if (password === null) {
+            alert("Bạn đã hủy nhập!");
+            break;
+        }
+
+        let loi = kiemTraMatKhau(password);
+
+        if (loi.length > 0) {
+            alert("Lỗi:\n" + loi.join("\n"));
+        } else {
+            let doManh = danhGiaDoManh(password);
+            alert("Mật khẩu hợp lệ!\nĐộ mạnh: " + doManh);
+            break;
+        }
+    }
+}
+
+// Gọi hàm khi mở trang
+nhapMatKhau();
+</script>
+
+</body>
+</html>
